@@ -1,6 +1,7 @@
-const mongoose=require("mongoose");
+require('dotenv').config();
+const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://jonytdelao:Andreita18@cluster0.b0fyinm.mongodb.net/myapp")
+mongoose.connect(process.env.DB_URL)
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch(err => console.error("MongoDB connection error:", err));
 
