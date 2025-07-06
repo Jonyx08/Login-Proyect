@@ -13,11 +13,11 @@ app.use(
   })
 );
 app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; script-src 'self' https://login-proyect-delta.vercel.app; style-src 'self';"
-  );
-  next();
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; script-src 'self' https://login-proyect-delta.vercel.app; style-src 'self';"
+    );
+    next();
 });
 app.use(express.json());
 app.set("view engine", "hbs");
