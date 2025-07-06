@@ -5,7 +5,6 @@ const hbs =require("hbs")
 const collection =require("./mongodb.js")
 const cors = require("cors") 
 const tempelatePath=path.join(__dirname,"templates")
-const crypto = require('crypto');
 
 
 app.use(cors({
@@ -21,7 +20,6 @@ app.set("view engine", "hbs")
 app.set("views",tempelatePath)
 app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, "public")))
-// Serve static files
 app.use(express.static('public'));
 
 
