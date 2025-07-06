@@ -4,13 +4,13 @@ const path =  require("path")
 const hbs =require("hbs")
 const collection =require("./mongodb.js")
 
-const tempelatePath=path.join(__dirname,'../tempelates')
+const tempelatePath=path.join(__dirname,"templates")
 
 app.use(express.json())
 app.set("view engine", "hbs")
 app.set("views",tempelatePath)
 app.use(express.urlencoded({extended:false}))
-app.use(express.static(path.join(__dirname, '../public')))
+app.use(express.static(path.join(__dirname, "public")))
 
 
 
