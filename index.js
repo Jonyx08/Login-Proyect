@@ -14,7 +14,13 @@ app.use(cors({
 app.use((req, res, next) => {
   res.setHeader(
     'Content-Security-Policy',
-    "default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';"
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://gc.kis.v2.scr.kaspersky-labs.com; " +
+    "style-src 'self' 'unsafe-inline' https://gc.kis.v2.scr.kaspersky-labs.com; " +
+    "style-src-elem 'self' 'unsafe-inline' https://gc.kis.v2.scr.kaspersky-labs.com; " +
+    "script-src-elem 'self' 'unsafe-inline' https://gc.kis.v2.scr.kaspersky-labs.com; " +
+    "img-src 'self' data: https:; " +
+    "connect-src 'self' https://gc.kis.v2.scr.kaspersky-labs.com wss://gc.kis.v2.scr.kaspersky-labs.com;"
   );
   next();
 });
