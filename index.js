@@ -5,8 +5,20 @@ const hbs =require("hbs")
 const collection =require("./mongodb.js")
 const cors = require("cors") 
 const tempelatePath=path.join(__dirname,"templates")
+const crypto = require('crypto');
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://midominio.vercel.app',
+  methods: ['GET', 'POST']
+}));
+app.use((req, res, next) => {
+  res.locals.nonce = crypto.randomBytes(16).toString('base64');
+  res.setHeader(
+    'Content-Security-Policy',
+    `default-src 'self'; script-src 'self' 'nonce-${res.locals.nonce}'; style-src 'self' 'nonce-${res.locals.nonce}';`
+  );
+  next();
+});
 app.use(express.json())
 app.set("view engine", "hbs")
 app.set("views",tempelatePath)
