@@ -11,7 +11,6 @@ app.use(cors({
   origin:  'https://login-proyect-delta.vercel.app',
   methods: ['GET', 'POST']
 }));
-app.use
 app.use((req, res, next) => {
     res.setHeader(
         'Content-Security-Policy',
