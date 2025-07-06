@@ -3,9 +3,10 @@ const app = express()
 const path =  require("path")
 const hbs =require("hbs")
 const collection =require("./mongodb.js")
-
+const cors = require("cors") 
 const tempelatePath=path.join(__dirname,"templates")
 
+app.use(cors())
 app.use(express.json())
 app.set("view engine", "hbs")
 app.set("views",tempelatePath)
