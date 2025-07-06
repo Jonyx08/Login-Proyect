@@ -12,10 +12,9 @@ app.use(cors({
   methods: ['GET', 'POST']
 }));
 app.use((req, res, next) => {
-  res.locals.nonce = crypto.randomBytes(16).toString('base64');
   res.setHeader(
     'Content-Security-Policy',
-    `default-src 'self'; script-src 'self' 'nonce-${res.locals.nonce}'; style-src 'self' 'nonce-${res.locals.nonce}';`
+    "default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';"
   );
   next();
 });
