@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - My App</title>
     <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-    
-    <h2>Log In</h2>
-    
-    <form class="container" action="/login" method="post">
+    <div class="login-page">
+        <h2>Log In</h2>
+        
+        <form class="container" action="/login" method="post">
+            <input type="text" name="name" autocomplete="username" placeholder="Name" required>
+            <input type="password" name="password" autocomplete="current-password" placeholder="Password" required>
+            <input type="submit" value="Log In">
+        </form>
 
-    <input type="text" name="name" autocomplete="name" placeholder="Name">
-    <input type="password" name="password" autocomplete="current-password" placeholder="Password">
-    <input type="submit">
-    
-    </form>
-
-    <a href="/signup">Make an account</a>
-    
+        <a href="/signup" class="signup-link">Make an account</a>
+    </div>
 </body>
 </html>
