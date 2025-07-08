@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - My App</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-    <div class="login-page">
-        <h2>Log In</h2>
-        
-        <form class="container" action="/login" method="post">
-            <input type="text" name="name" autocomplete="username" placeholder="Name" required>
-            <input type="password" name="password" autocomplete="current-password" placeholder="Password" required>
-            <input type="submit" value="Log In">
-        </form>
+    <h2>Log In</h2>
+    
+    <form class="container" action="/login" method="post">
+        <input type="text" name="name" autocomplete="username" placeholder="Name" required>
+        <input type="password" name="password" autocomplete="current-password" placeholder="Password" required>
+        <input type="submit" value="Log In">
+    </form>
 
-        <a href="/signup" class="signup-link">Make an account</a>
-    </div>
+    <a href="/signup">Make an account</a>
 </body>
 </html>

@@ -4,10 +4,15 @@ const path = require("path");
 const hbs = require("hbs");
 const collection = require("./mongodb.js");
 const cors = require("cors");
+const { engine } = require('express-handlebars');
 
 // Fixed the typo: templatePath instead of tempelatePath
 const templatePath = path.join(__dirname, "templates");
 
+app.engine('hbs', engine({
+  extname: '.hbs',
+  defaultLayout: false  // No layout for now
+}));
 app.use(
   cors({
     origin: "https://login-proyect-delta.vercel.app",
