@@ -1,9 +1,18 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const hbs = require("hbs");
 const collection = require("./mongodb.js");
 const cors = require("cors");
+const { engine } = require('express-handlebars');
 
+// Fixed the typo: templatePath instead of tempelatePath
+const templatePath = path.join(__dirname, "templates");
+
+app.engine('hbs', engine({
+  extname: '.hbs',
+  defaultLayout: false  // No layout for now
+}));
 app.use(
   cors({
     origin: "https://login-proyect-delta.vercel.app",
@@ -11,29 +20,34 @@ app.use(
   })
 );
 
-// CSP middleware removed - less secure but no restrictions
-// app.use((req, res, next) => {
-//   res.setHeader('Content-Security-Policy', '...');
-//   next();
-// });
+// Fixed CSP header to allow your own styles and scripts
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; " +
+    "script-src 'self' https://login-proyect-delta.vercel.app; " +
+    "style-src 'self' 'unsafe-inline' https://login-proyect-delta.vercel.app; " +
+    "font-src 'self'; " +
+    "img-src 'self' data:; " +
+    "connect-src 'self' https://login-proyect-delta.vercel.app;"
+  );
+  next();
+});
 
 app.use(express.json());
+app.set("view engine", "hbs");
+app.set("views", templatePath); // Fixed variable name
 app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, "public")));
 
-// Routes to serve HTML files
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+  res.render("login");
 });
 
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "signup.html"));
-});
-
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "home.html"));
+  res.render("signup");
 });
 
 app.post("/signup", async (req, res) => {
@@ -44,10 +58,10 @@ app.post("/signup", async (req, res) => {
 
   try {
     await collection.insertOne(data);
-    res.redirect("/home");
+    res.render("home");
   } catch (error) {
     console.error("Signup error:", error);
-    res.status(500).send("Error creating account");
+    res.send("Error creating account");
   }
 });
 
@@ -58,13 +72,13 @@ app.post("/login", async (req, res) => {
     console.log("Found user:", check);
 
     if (check && check.password === req.body.password) {
-      res.redirect("/home");
+      res.render("home");
     } else {
-      res.status(401).send("Wrong password");
+      res.send("wrong password");
     }
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).send("Wrong details");
+    res.send("wrong details");
   }
 });
 
