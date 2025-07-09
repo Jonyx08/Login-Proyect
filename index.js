@@ -11,19 +11,11 @@ app.use(
   })
 );
 
-// Fixed CSP header to allow your own styles and scripts
-app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; " +
-    "script-src 'self' https://login-proyect-delta.vercel.app; " +
-    "style-src 'self' 'unsafe-inline' https://login-proyect-delta.vercel.app; " +
-    "font-src 'self'; " +
-    "img-src 'self' data:; " +
-    "connect-src 'self' https://login-proyect-delta.vercel.app;"
-  );
-  next();
-});
+// CSP middleware removed - less secure but no restrictions
+// app.use((req, res, next) => {
+//   res.setHeader('Content-Security-Policy', '...');
+//   next();
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
